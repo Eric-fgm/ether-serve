@@ -1,0 +1,122 @@
+import { Code, NodeCode } from "../../../components/code";
+
+# Context
+
+The Context object can be used to handle both the Request and Response.
+
+### req
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/', async (c) => {
+        console.log(c.req.params()); // Parameters
+        console.log(c.req.query()); // Query object
+        console.log(await c.req.json()); // JSON body
+        console.log(await c.req.text()); // Text body
+        console.log(await c.req.body()); // Raw body
+        console.log(c.req.protocol);
+        console.log(c.req.url);
+        console.log(c.req.path);
+        console.log(c.req.pathname);
+        console.log(c.req.pathRegex);
+        console.log(c.req.method);
+        console.log(c.req.headers);
+        //...
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### headers
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/', (c) => {
+        c.headers.append(name, value);
+        c.headers.set(name, value);
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### set()
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.use(async (c, next) => {
+        c.set('user', { name: 'John' });
+        await next();
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### get()
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/', (c) => {
+        const user = c.get('user'); // { name: 'John' }
+        //...
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### status()
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/', (c) => {
+        if (counter > 0) {
+            return c.status(429); // Too Many Requests
+        }
+        //...
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### json()
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.post('/books', async (c) => {
+        //...
+        return c.status(201).json('Created book!');
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### text()
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/', async (c) => {
+        return c.status(200).text('Hello World!');
+    })
+    ```
+
+    </NodeCode>
+
+</Code>

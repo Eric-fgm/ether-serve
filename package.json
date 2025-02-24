@@ -1,10 +1,11 @@
 {
-  "name": "kitchen-sink",
+  "name": "ether-serve",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev": "turbo run dev",
+    "dev:example-node": "turbo run dev --filter=example-node",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "lint": "turbo run lint",
     "test": "turbo run test",

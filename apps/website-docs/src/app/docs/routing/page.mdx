@@ -1,0 +1,50 @@
+import { Code, NodeCode } from "../../../components/code";
+
+# Routing
+
+Ether's routing system is both flexible and easy to use. Let's explore how it works.
+
+### Basic
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/', (c) => c.status(200).text('GET /'))
+    app.post('/', (c) => c.status(200).text('POST /'))
+    app.put('/', (c) => c.status(200).text('PUT /'))
+    app.delete('/', (c) => c.status(200).text('DELETE /'))
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### Parameters
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/users/:email', (c) => {
+        const email = c.req.params('email');
+        //...
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### Wildcard
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get('/dashboard/*between/users', (c) => {
+        const pathBetweenDashboardAndUsers = c.req.params('between');
+        //...
+    })
+    ```
+
+    </NodeCode>
+
+</Code>

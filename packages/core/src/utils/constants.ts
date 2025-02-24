@@ -1,0 +1,1 @@
+export const METHOD_MIDDLEWARE_WILDCARD = "*";

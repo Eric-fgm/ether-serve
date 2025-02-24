@@ -1,0 +1,27 @@
+import { Code, NodeCode } from "../../../components/code";
+
+# Application
+
+`ether` is main function, imported at the start and utilized throughout the application.
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    import { ether, serve } from "@ether-serve/node";
+    
+    const app = ether();
+    const app2 = ether();
+    
+    app.route("/another-app", app2);
+    app.onError((error, c) => {
+        //...
+    });
+
+    serve({
+        fetch: app.fetch.bind(app),
+    });
+    ```
+
+    </NodeCode>
+
+</Code>

@@ -1,0 +1,55 @@
+import { Steps } from "nextra/components";
+import { Code, NodeCode } from "../../../components/code";
+
+# Middleware
+
+### Execution order
+
+The execution order of Middleware is determined by the sequence in which it is registered. The process in the first registered Middleware runs first, while the process in the last registered Middleware runs last. See the example below.
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.use(async (_, next) => {
+      console.log('middleware 1 start')
+      await next()
+      console.log('middleware 1 end')
+    })
+    app.use(async (_, next) => {
+      console.log('middleware 2 start')
+      await next()
+      console.log('middleware 2 end')
+    })
+    app.use(async (_, next) => {
+      console.log('middleware 3 start')
+      await next()
+      console.log('middleware 3 end')
+    })
+
+    app.get('/', (c) => {
+      console.log('get handler')
+      return c.status(200).text('Hello World!')
+    })
+    ```
+
+    </NodeCode>
+
+</Code>
+
+The result is as follows:
+
+<br />
+
+<code>
+
+    ```
+    middleware 1 start
+      middleware 2 start
+        middleware 3 start
+          get handler
+        middleware 3 end
+      middleware 2 end
+    middleware 1 end
+    ```
+
+</code>

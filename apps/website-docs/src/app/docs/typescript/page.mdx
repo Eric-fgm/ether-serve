@@ -1,0 +1,38 @@
+import { Code, NodeCode } from "../../../components/code";
+
+# Typescript
+
+TypeScript is a strongly typed superset of JavaScript that adds static typing, interfaces, and better tooling support while compiling to JavaScript. It helps catch errors at compile-time, improves code maintainability, and enhances developer experience.
+
+### Config
+
+It is recommend enabling strict mode in your TypeScript config file:
+
+```ts filename="tsconfig.json"
+    {
+      "compilerOptions": {
+          "strict": true
+      }
+    }
+```
+
+### Generics
+
+Typesafety for state, params, query, body and response.
+
+<Code>
+  <NodeCode type="NodeCode">
+  
+    ```ts filename="index.ts"
+    import type { Context } from "@ether-serve/node";
+
+    app.get("/workspace/:slug", (c: Context<{ user: { name: string } }, { slug: string }>) => {
+        const slug = c.req.params('slug'); // string
+        const user = c.get('user'); // { name: string }
+
+        //...
+    });
+    ```
+
+  </NodeCode>
+</Code>

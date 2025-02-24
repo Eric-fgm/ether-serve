@@ -1,0 +1,68 @@
+import { Steps } from "nextra/components";
+import { Code, NodeCode } from "../../../components/code";
+
+# Installation
+
+<Steps>
+### Install the Package
+
+<Code>
+  <NodeCode type="NodeCode">
+
+    ```bash npm2yarn
+    npm install @ether-serve/node
+    ```
+
+  </NodeCode>
+</Code>
+
+### Setup
+
+Simple example of Hello World application.
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    import { ether, serve } from "@ether-serve/node";
+
+    const app = ether();
+    app.get("/", (c) => c.status(200).text("Hello World"));
+
+    serve({
+        fetch: app.fetch.bind(app),
+        port: 8080,
+    });
+    ```
+
+  </NodeCode>
+</Code>
+
+### Run
+
+Run the development server locally.
+
+<Code>
+  <NodeCode type="NodeCode">
+
+    ```bash npm2yarn
+    npm run dev
+    ```
+
+  </NodeCode>
+</Code>
+
+### 🎉 That's it!
+
+You're all set! You can quickly start building scalable and high-performance APIs or real-time applications. With its intuitive routing, middleware support, and efficient request handling, developing secure and optimized backend solutions becomes seamless.
+
+</Steps>
+
+## Client API
+
+<Steps>
+
+### Coming Soon
+
+The Ether Serve Client API is coming soon, bringing seamless integration for frontend applications to communicate efficiently with the backend.
+
+</Steps>

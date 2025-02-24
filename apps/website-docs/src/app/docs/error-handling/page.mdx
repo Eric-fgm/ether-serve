@@ -1,0 +1,24 @@
+import { Code, NodeCode } from "../../../components/code";
+
+# Error Handling
+
+You can manage thrown HTTPExceptions using app.onErro
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    import { CustomAlreadyExistsException } from './exceptions'
+
+    //...
+
+    app.onError((error, c) => {
+        if (error instanceof CustomAlreadyExistsException) {
+            return c.status(409);
+        }
+        // ...
+    });
+    ```
+
+    </NodeCode>
+
+</Code>

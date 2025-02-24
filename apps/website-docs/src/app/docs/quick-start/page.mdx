@@ -1,0 +1,78 @@
+import { Code, NodeCode } from "../../../components/code";
+
+# Quick Start
+
+### Basic
+
+Write your first application with Ether Serve. The example below is a starter application.
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    import { ether, serve } from "@ether-serve/node";
+
+    const app = ether();
+
+    app.use(async (c, next) => {
+        console.log("middleware", c.req.path);
+        await next();
+    });
+
+    app.get("/", async (c) => {
+        return c.status(200).text("Hello World");
+    });
+
+    serve({
+        fetch: app.fetch.bind(app),
+        port: 8080,
+    });
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### Working with JSON
+
+Getting and returning JSON is easy:
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.post("/books", async (c) => {
+        const body = await c.req.json();
+        return c.status(200).json({ body });
+    });
+    ```
+
+    </NodeCode>
+
+</Code>
+
+### Handle all HTTP methods
+
+An intuitive way to handle all HTTP methods.
+
+<Code>
+  <NodeCode type="NodeCode">
+    ```ts filename="index.ts"
+    app.get("/books", (c) => {
+        return c.status(200).text("Hello World!");
+    });
+
+    app.post("/books", (c) => {
+        return c.status(201).text("Created!");
+    });
+
+    app.put("/books/:id", (c) => {
+        return c.status(200).text(`Updated book ${c.req.params('id')}!`);
+    });
+
+    app.delete("/books/:id", (c) => {
+        return c.status(200).text(`Deleted book ${c.req.params('id')}!`);
+    });
+    ```
+
+    </NodeCode>
+
+</Code>

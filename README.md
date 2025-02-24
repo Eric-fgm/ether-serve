@@ -1,40 +1,57 @@
-# Turborepo kitchen sink starter
+# Ether Serve
 
-This Turborepo starter is maintained by the Turborepo core team.
+![License](https://img.shields.io/github/license/Eric-fgm/ether-serve)
+![Version](https://img.shields.io/npm/v/ether-serve)
+![Build Status](https://img.shields.io/github/actions/workflow/status/your-repo/ether-serve/build.yml)
 
-This example also shows how to use [Workspace Configurations](https://turbo.build/repo/docs/core-concepts/monorepos/configuring-workspaces).
+A lightweight and high-performance HTTP framework for building scalable APIs and real-time applications with ease.
 
-## Using this example
+## Features
 
-Run the following command:
+- 🔑 Simple Routing: Intuitive way to define routes and handle HTTP methods.
+- 🔄 Middleware Support: Flexible middleware system for handling requests, responses, and errors.
+- 🛡️ Built-in Error Handling: Automatically handles HTTP exceptions and errors.
+- 📌 Fast Performance: Optimized for high-performance applications, leveraging Node.js’s non-blocking architecture.
+
+## Installation
 
 ```sh
-npx create-turbo@latest -e kitchen-sink
+npm install ether-serve
 ```
 
-## What's inside?
+## Usage
 
-This Turborepo includes the following packages and apps:
+### Importing the Library
 
-### Apps and Packages
+```javascript
+import { ether, serve } from "@ether-serve/node";
 
-- `api`: an [Express](https://expressjs.com/) server
-- `storefront`: a [Next.js](https://nextjs.org/) app
-- `admin`: a [Vite](https://vitejs.dev/) single page app
-- `blog`: a [Remix](https://remix.run/) blog
-- `@repo/eslint-config`: ESLint configurations used throughout the monorepo
-- `@repo/jest-presets`: Jest configurations
-- `@repo/logger`: isomorphic logger (a small wrapper around console.log)
-- `@repo/ui`: a dummy React UI library (which contains `<CounterButton>` and `<Link>` components)
-- `@repo/typescript-config`: tsconfig.json's used throughout the monorepo
+const app = ether();
 
-Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+app.get("/", (c) => {
+  return c.status(200).text("Hello World");
+});
 
-### Utilities
+serve({
+  fetch: app.fetch.bind(app),
+});
+```
 
-This Turborepo has some additional tools already setup for you:
+### Middlewares
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Jest](https://jestjs.io) test runner for all things JavaScript
-- [Prettier](https://prettier.io) for code formatting
+```javascript
+//...
+
+app.use(async (c, next) => {
+  console.log(c.req.url);
+  await next();
+});
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
